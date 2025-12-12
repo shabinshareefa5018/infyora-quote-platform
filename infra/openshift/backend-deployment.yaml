@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quote-api
+  name: backend
+  labels:
+    app: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: quote-api
+      app: backend
   template:
     metadata:
       labels:
-        app: quote-api
+        app: backend
     spec:
       containers:
-        - name: quote-api
-          image: image-registry.openshift-image-registry.svc:5000/shabinshareefa5018-dev/backend@sha256:a2cbec9182806df24a9f941a51dd351e23d4241ca7589c245cfdc63802886966
+        - name: backend
+          image: image-registry.openshift-image-registry.svc:5000/shabinshareefa5018-dev/backend:latest
           ports:
             - containerPort: 5000
+          imagePullPolicy: Always
